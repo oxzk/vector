@@ -10,10 +10,18 @@ main:
         - name: Set up Python venv
           script: |
             cd /workspace
+            echo $SHELL
+            ls -la ~
             if [ ! -d ".venv" ]; then
               python3 -m venv .venv
             fi
-            source .venv/bin/activate
+            
+            if command -v pip >/dev/null 2>&1; then
+                echo "pip 已安装"
+            else
+                echo "pip 未安装"
+                . .venv/bin/activate
+
             python --version
             cat /root/.cnb/v2ray-config.json
 
