@@ -1,0 +1,31 @@
+name: DatabaseTester
+
+on:
+  schedule:
+    - cron: "0 * * * *"
+  workflow_dispatch: # 允许手动触发
+
+jobs:
+  run:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          fetch-depth: 0  
+
+      - name: Set up Python
+        uses: actions/setup-python@v6
+        with:
+          python-version: "3.11"
+
+      - name: Install dependencies
+        run: |
+          pip install -r requirements.txt
+
+      - name: Run DatabaseTester
+        env:
+          MONGO_URL: ${{ secrets.MONGO_URL }}
+          REDIS_URL: ${{ secrets.REDIS_URL }}
+        run: |
+          python cli.py tester

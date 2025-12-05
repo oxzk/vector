@@ -1,0 +1,6 @@
+redis==7.1.0
+motor==3.7.1
+python-dotenv==1.2.1
+beautifulsoup4==4.14.2
+aiohttp==3.10.11
+asyncpg==0.30.0
